@@ -12,13 +12,18 @@ let todos: TodoItem[] = [
 let collection: TodoCollection = new JsonTodoCollection("Paul", todos);
 let showCompleted = true;
 
+/**
+ * Displays the todo list with the user's name and the number of incomplete items.
+ */
 function displayTodoList(): void {
   console.log(`${collection.userName}'s Todo List `
     + `(${collection.getItemCounts().incomplete} items to do)`);
-  //collection.getTodoItems(true).forEach(item => item.printDetails());
   collection.getTodoItems(showCompleted).forEach(item => item.printDetails());
 }
 
+/**
+ * Represents the available commands in the application.
+ */
 enum Commands {
   Add = "Add New Task",
   Complete = "Complete Task",
@@ -27,6 +32,9 @@ enum Commands {
   Quit = "Quit"
 }
 
+/**
+ * Prompts the user to enter a task and adds it to the collection.
+ */
 function promptAdd(): void {
   console.clear();
   inquirer.prompt({ type: "input", name: "add", message: "Enter task:" })
@@ -38,6 +46,9 @@ function promptAdd(): void {
     });
 }
 
+/**
+ * Displays the todo list and prompts the user to mark tasks as complete.
+ */
 function promptComplete(): void {
   console.clear();
   displayTodoList();
@@ -55,6 +66,9 @@ function promptComplete(): void {
   });
 }
 
+/**
+ * Prompts the user to choose an option and performs the corresponding action.
+ */
 function promptUser(): void {
   console.clear();
   displayTodoList();
